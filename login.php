@@ -14,6 +14,7 @@
 					<li><a href="events.php">Find Events </a></li>
 					<li><a href="signup.php">Signup</a></li>
 					<li><a href="login.php">Log in</a></li>
+					<li><a href="rso.php">Create RSO</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -24,9 +25,10 @@
 			<br><button type="submit" name="submit">Login</button>
 		</form>
 		
-<?php
 
-?>
+<!-- ADD PHP TO CHECK IF UN AND PW ARE IN DATABASE
+MIN 1:24 OF HOW TO CREATE A LOGIN SYSTEM VID BY DANI -->
+
 	
 	
 	</body>

@@ -14,6 +14,7 @@
 					<li><a href="events.php">Find Events </a></li>
 					<li><a href="signup.php">Signup</a></li>
 					<li><a href="login.php">Log in</a></li>
+					<li><a href="rso.php">Log in</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -22,6 +23,7 @@
 		<form action="createUser.php" method="POST">
 			<input type="text" name="first" placeholder="First Name">
 			<input type="text" name="last" placeholder="Last Name">
+			<input type="text" name="studentID" placeholder="Student ID">
 			<input type="text" name="email" placeholder="E-mail">
 			<br><input type="password" name="password" placeholder="password">
 			<br><select name="university">
@@ -29,6 +31,12 @@
 				<option value="uni1">UCF</option>
 				<option value="uni2">USF</option>
 				<option value="uni3">FAU</option>
+				</select>
+				
+			<br><select name="level">
+				<option value="super_admin">Super Admin</option>
+				<option value="admin">Admin</option>
+				<option value="student">Student</option>
 				</select>
 			<br><button type="submit" name="submit">Signup</button>
 		</form>

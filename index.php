@@ -20,6 +20,7 @@
 					<li><a href="events.php">Find Events </a></li>
 					<li><a href="signup.php">Signup</a></li>
 					<li><a href="login.php">Log in</a></li>
+					<li><a href="rso.php">Create RSO</a></li>
 				</ul>
 			</div>
 		</nav>
