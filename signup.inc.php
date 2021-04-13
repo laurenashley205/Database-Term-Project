@@ -9,6 +9,7 @@ if(isset($_POST["submit"])){
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$u_pid = RandomNum();
 	$password = mysqli_real_escape_string($conn, $_POST['password']);
+	$university = $_POST['university'];
 	$security = $_POST['security'];
 		
 	if(EmptyInputSignup($first,$last,$email,$password)!== false){
@@ -24,7 +25,7 @@ if(isset($_POST["submit"])){
 		exit();
 	}
 	
-	CreateUser($conn,$first,$last,$email,$u_pid,$password,$security);
+	CreateUser($conn,$first,$last,$email,$u_pid,$password,$university,$security);
 		
 	header("Location: login.php?signup=success");
 }

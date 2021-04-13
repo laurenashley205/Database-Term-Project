@@ -10,11 +10,18 @@
 		<br>
 		<input type="password" name="password" placeholder="password">
 		<br><br>
+		<h3 style="color: black; font-family: Alata; padding-top: 10px;">Select school</h3>
+		<select name="university">
+			<option value="ucf">UCF</option>
+			<option value="fau">FAU</option>
+			<option value="uf">UF</option>
+		</select>
+		<h3 style="color: black; font-family: Alata; padding-top: 10px;">Select role</h3>
 		<select name="security">
 			<option value="student">Student</option>
 			<option value="admin">Admin</option>
 			<option value="superadmin">Super Admin</option>
-			</select>
+		</select>
 		<br>
 		<button type="submit" name="submit">Sign Up</button>
 		<br>

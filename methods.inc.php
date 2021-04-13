@@ -61,16 +61,16 @@ function EmailExists($conn,$email){
 	mysqli_stmt_close($stmt);
 }
 
-function CreateUser($conn,$first,$last,$email,$u_pid,$password,$security){
+function CreateUser($conn,$first,$last,$email,$u_pid,$password,$university,$security){
 	
-	$sql = "INSERT INTO Users (fname, lname, email, u_pid, password,security)
-	VALUES (?,?,?,?,?,?);";
+	$sql = "INSERT INTO Users (fname, lname, email, u_pid, password, university, security)
+	VALUES (?,?,?,?,?,?,?);";
 	$stmt = mysqli_stmt_init($conn);
 	if(!mysqli_stmt_prepare($stmt,$sql)){
 		header("location: signup.php?error=stmtfailed");
 		exit();
 	}
-	mysqli_stmt_bind_param($stmt,"ssssss",$first, $last, $email, $u_pid, $password, $security);
+	mysqli_stmt_bind_param($stmt,"sssssss",$first, $last, $email, $u_pid, $password,$university, $security);
 	mysqli_stmt_execute($stmt);
 	mysqli_stmt_close($stmt);
 	header("location: login.php?error=none");
@@ -111,14 +111,103 @@ function loginUser($conn,$email,$password){
 		$_SESSION["lastName"] =  $emailExists["lname"];		
 		$_SESSION["email"] =  $emailExists["email"];		
 		$_SESSION["status"] =  $emailExists["security"];
+		$_SESSION["university"] = $emailExists["university"];
+		$_SESSION["uid"] = $emailExists["u_id"];
 		header("location: index.php");
 		exit();
 	}
 }
 
+function findLocation($conn,$email){
+	$location = EmailExists($conn,$email);
+	$loc = $location['university'];
+	return $loc;
+	
+}
 
+function EmptyInputRso($name,$first,$second,$third,$fourth){
+	
+	$result;
+	if(empty($name) || empty($first) || empty($second) || empty($third) || empty($fourth)){
+		$result = true;
+	}
+	else{
+		$result = false;
+	}
+	return $result;	
+	
+}
+	
+function RsoExists($conn,$name){
+	$sql = "SELECT * FROM Rsos WHERE name = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: createRso.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"s",$name);
+	mysqli_stmt_execute($stmt);
+	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if($row = mysqli_fetch_assoc($resultData)){
+		return $row;
+	}
+	else{
+		$result = false;
+		return $result;
+	}
+	mysqli_stmt_close($stmt);
+	
+}
 
+ function CreateRso($conn,$name,$type){
 	
+	$sql = "INSERT INTO Rsos (name, type) VALUES (?,?);";
 	
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: createRso.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"ss",$name, $type);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_close($stmt);
+}
+
+function GetRid($conn,$name){
+	$rid = RsoExists($conn,$name);
+	$idnum = $rid["r_id"];
+	return $idnum;
+}
+
+function UpdateMember($conn,$email,$r_id){
+	$emailExists = EmailExists($conn,$email);
+	$u_id = $emailExists["u_id"];
+	$sql = "INSERT INTO Rso_members (r_id, u_id)
+	VALUES (?,?);";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: createRso.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"ss",$r_id, $u_id);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_close($stmt);
+}
 	
+function DisplayGroups($conn,$uid){
 	
+	$sql = "SELECT name FROM Rsos 
+		INNER JOIN Rso_members ON Rso_members.r_id = Rsos.r_id
+		INNER JOIN Users ON Users.u_id = Rso_members.u_id
+		WHERE Users.u_id = $uid;";		
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				echo "<p> " .$row['name'] . "</p>";
+			}
+		}
+}
+
