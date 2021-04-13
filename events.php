@@ -1,47 +1,7 @@
-<!-- <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>	</title>
-		<link rel="stylesheet" href="style.css">
-	</head>
-	<body>
-		<nav>
-			<div class="wrapper">
-				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="contact.php">Contact</a></li>
-					<li><a href="events.php">Find Events </a></li>
-					<li><a href="signup.php">Signup</a></li>
-					<li><a href="login.php">Log in</a></li>
-				</ul>
-			</div>
-		</nav>
+<?php
+	include_once 'header.html';
+?>
 	
-	</body>
-</html> -->
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>	</title>
-		<link rel="stylesheet" href="style.css">
-	</head>
-	<body>
-		<nav>
-			<div class="wrapper">
-				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="contact.php">Contact</a></li>
-					<li><a href="events.php">Find Events </a></li>
-					<li><a href="signup.php">Signup</a></li>
-					<li><a href="login.php">Log in</a></li>
-					<li><a href="rso.php">Create RSO</a></li>
-
-				</ul>
-			</div>
-		</nav>
 <!-- Can only be created by admin or super admin if admin, automatically attach the RSO if selected-->
 		
 		<form action="createEvent.php" method="POST">
@@ -66,10 +26,10 @@
 			<p>RSO:</p> <input type="radio" name="type" value="RSO">
 			<br>
 			<input type="text" name="rsoname" placeholder="Enter RSO">
-
 			<button type="submit" name="submit">Create</button>
 		</form>
 	
 	
-	</body>
-</html>
+	<?php
+	include_once 'footer.html';
+?>

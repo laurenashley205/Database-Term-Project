@@ -1,38 +1,46 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title>	</title>
-		<link rel="stylesheet" href="style.css">
-	</head>
-	<body>
-		<nav>
-			<div class="wrapper">
-				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="contact.php">Contact</a></li>
-					<li><a href="events.php">Find Events </a></li>
-					<li><a href="signup.php">Signup</a></li>
-					<li><a href="login.php">Log in</a></li>
-					<li><a href="rso.php">Create RSO</a></li>
-				</ul>
-			</div>
-		</nav>
-		<!-- action will take you to the next page-->
-		<form action="index.php" method="post">
-			<input type="text" name="S.usermame" placeholder="Username">
-			<br><input type="password" name="S.pwd" placeholder="password">
-			<br><button type="submit" name="submit">Login</button>
-		</form>
+<?php
+	include_once 'header.html';
+?>
+	
+<h1>Log in</h1>
+<div class="form-sheet">
+	<form action="login.inc.php" method="post">
+		<input type="text" name="email" placeholder="email">
+		<br>
+		<input type="password" name="password" placeholder="password">
+		<br>
+		<button type="submit" name="submit">Log In</button>
+		<h3 style="color: black; font-family: Alata; padding: 10px 0 10px 0; margin-left: 125px;">New User?</h3>
+		<a style="margin-left:130px; href="signup.php">Sign Up</a>
+		<br><br>
+	</form>
+	<?php
+	if(isset($_GET["error"])){
+		if($_GET["error"]=="emptyinput"){
+			echo "<p>Fill in all fields!</p>";
+		}
+		else if($_GET["error"]=="emailnotfound"){
+			echo"<p>Email is not correct!</p>";
+		}
+		else if($_GET["error"]=="wrongpassword"){
+			echo"<p>Password is not correct!</p>";
+		}
+		else if($_GET["error"]=="stmtfailed"){
+			echo"<p>Something went wrong, try again!</p>";
+		}
+		else if($_GET["error"]=="loggedout"){
+			echo"<p>You have logged out successfully!</p>";
+		}
+	}
+?>
+</div>
 		
 
-<!-- ADD PHP TO CHECK IF UN AND PW ARE IN DATABASE
-MIN 1:24 OF HOW TO CREATE A LOGIN SYSTEM VID BY DANI -->
-
 	
 	
-	</body>
-</html>
+	<?php
+	include_once 'footer.html';
+?>
 
 <!--
 <p>Option 1:</p> <input type="radio" name="gender" value="Male">

@@ -1,47 +1,34 @@
 <?php
-	include_once 'connect.php';
+	include_once 'header.html';
+	include_once 'methods.inc.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="style.css">
-		<title>Main Page</title>
-	</head>
-	<body>
 	
-		<nav>
-			<div class="wrapper">
-				
-				<ul>
-					<li><a href="index.php">Home</a></li>
-					<li><a href="contact.php">Contact</a></li>
-					<li><a href="events.php">Find Events </a></li>
-					<li><a href="signup.php">Signup</a></li>
-					<li><a href="login.php">Log in</a></li>
-					<li><a href="rso.php">Create RSO</a></li>
-				</ul>
-			</div>
-		</nav>
-		
-		<div class="wrapper">
-			<h1>Log in to access</h1>
-			<p>Temporary words to placehold</p>
-		</div>
-			
+<div class="welcome-screen">
 	<?php
-		$sql = "SELECT * FROM Users WHERE fname = 'test';";
-		$result = mysqli_query($conn, $sql);
-		$resultCheck = mysqli_num_rows($result);
-		if($resultCheck > 0){
-			while($row = mysqli_fetch_assoc($result)){
-				echo $row['fname'];
-			}
-		}
+	
+	if(isset($_SESSION["pid"])){
+		echo "<p>Welcome " .$_SESSION["name"] ."</p>";
+	}
+	else{
+		header("location: signup.php");
+		exit();
+	}
 	?>
-
-
-			
-	</body>
-</html>
+	<?php
+	if($_SESSION["status"] === "student"){
+		echo "<h2>Show student allowed event stream here</h2>";
+	}
+	if($_SESSION["status"] === "admin"){
+		echo "<h2>Show admin allowed event stream here</h2>";
+	}
+	if($_SESSION["status"] === "superadmin"){
+		echo "<h2>Show RSO requests here</h2>";
+	}
+	?>
+</div>
+		
+						
+<?php
+	include_once 'footer.html';
+?>
+		
