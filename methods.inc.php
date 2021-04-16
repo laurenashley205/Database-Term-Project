@@ -211,3 +211,114 @@ function DisplayGroups($conn,$uid){
 		}
 }
 
+function showAvailableRso($conn,$uni){
+	
+	
+	$sql = "SELECT DISTINCT name, type FROM Rsos
+		INNER JOIN Rso_members ON Rso_members.r_id = Rsos.r_id
+		INNER JOIN Users ON Users.u_id = Rso_members.u_id
+		WHERE Users.university = '$uni';";	
+			$result = mysqli_query($conn, $sql);
+			$resultCheck = mysqli_num_rows($result);
+			if($resultCheck > 0){
+				while($row = mysqli_fetch_assoc($result)){
+					echo  "<h2>Name: \t" .$row["name"] .  "<br> Type: \t"  . $row["type"] . "</h2>";
+				}
+			}
+			
+			
+}
+
+function DisplayRso($conn,$name){
+	$rsoName = RsoExists($conn,$name);
+	if($rsoName!== false){
+		echo "<p> " .$rsoName['name'] . "</p>";
+		return $rsoName;
+	}
+	else{
+		return $rsoName;
+	}
+	
+}
+
+
+function checkIfMember($conn,$uid,$name){
+	$rso = RsoExists($conn,$name);
+	$rid = $rso['r_id'];
+	
+	$sql = "SELECT 1 FROM Rso_members
+		WHERE u_id = $uid AND r_id = $rid;";		
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	
+}
+
+function LeaveRso($conn,$name,$uid){
+	$rso = RsoExists($conn,$name);
+	$rid = $rso['r_id'];
+	$sql = "DELETE FROM Rso_members
+	WHERE Rso_members.u_id = $uid AND Rso_members.r_id = $rid;";		
+	$result = mysqli_query($conn, $sql);
+	$resultCheck = mysqli_num_rows($result);
+	UpdateRsoStatus($conn,$rid);
+	
+}
+
+function JoinRso($conn,$name,$uid){
+	$rso = RsoExists($conn,$name);
+	$rid = $rso['r_id'];
+	if(!checkIfMember($conn,$uid,$name)){
+		$sql = "INSERT INTO Rso_members (r_id, u_id)
+		VALUES (?,?);";
+		$stmt = mysqli_stmt_init($conn);
+		if(!mysqli_stmt_prepare($stmt,$sql)){
+			header("location: searchRso.php?error=stmtfailed");
+			exit();
+		}
+		mysqli_stmt_bind_param($stmt,"ss",$rid, $uid);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_close($stmt);
+		UpdateRsoStatus($conn,$rid);
+	}
+	else{
+		header("location: searchRso.php?error=alreadymember");
+			exit();
+	}
+	
+}
+
+function UpdateRsoStatus($conn,$rid){
+	$sql = "SELECT COUNT(r_id) as total FROM Rso_members 
+	WHERE r_id = $rid;";
+	$result = mysqli_query($conn, $sql);
+	$data = mysqli_fetch_assoc($result);
+	if($data['total'] > 4){
+		$sql = "UPDATE Rsos SET status = 'active' WHERE r_id = $rid;";
+		$result = mysqli_query($conn, $sql);
+	}
+	else{
+		$sql = "UPDATE Rsos SET status = 'inactive' WHERE r_id = $rid;";
+		$result = mysqli_query($conn, $sql);
+	}
+}
+	
+function showFiltered($conn,$filter,$uni){
+	$sql = "SELECT DISTINCT name FROM Rsos
+		INNER JOIN Rso_members ON Rso_members.r_id = Rsos.r_id
+		INNER JOIN Users ON Users.u_id = Rso_members.u_id
+		WHERE Users.university = '$uni' AND Rsos.type = '$filter';";	
+		$result = mysqli_query($conn, $sql);
+			$resultCheck = mysqli_num_rows($result);
+			if($resultCheck > 0){
+				while($row = mysqli_fetch_assoc($result)){
+					echo  "<h2>Name: \t" .$row["name"] .  "<br> Type: \t"  . $filter . "</h2>";
+				}
+			}
+	
+}

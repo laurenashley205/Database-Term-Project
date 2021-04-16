@@ -25,6 +25,23 @@ CREATE table Events (		//include the email of the user who created the event and
 	u_id		INT FOREIGN KEY REFERENCES Users(u_id)
 );
 
+//lauren database table 
+CREATE TABLE events (
+	e_id 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	name		VARCHAR(20)	NOT NULL,
+	description	TEXT,
+	start_date	VARCHAR(20) NOT NULL,
+    end_date	VARCHAR(20) NOT NULL,
+	location    VARCHAR(100) NOT NULL,
+	email       VARCHAR(100) NOT NULL,
+	category	VARCHAR(20) NOT NULL,
+	type		VARCHAR(20) NOT NULL,
+	r_name		VARCHAR(50),
+	r_id		INT,
+	FOREIGN KEY (r_id) REFERENCES Rsos(r_id)
+)
+
+
 CREATE table Comments (			
 	e_id 		INT NOT NULL PRIMARY KEY,	
 	u_id		INT	NOT NULL PRIMARY KEY,

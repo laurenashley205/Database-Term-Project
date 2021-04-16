@@ -11,7 +11,7 @@
     $E_id = random_num();
 	$type = mysqli_real_escape_string($conn, $_POST['type']);
 
-		$sql = "INSERT INTO events (name, category, start_date, end_date, description, L_name, E_id, type)
+		$sql = "INSERT INTO Events (name, category, start_date, end_date, description, L_name, E_id, type)
 	VALUES ('$name', '$category', '$start_date', '$end_date', '$description', '$L_name', 'E_id', 'type');";
 		mysqli_query($conn, $sql);
 		

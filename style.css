@@ -138,6 +138,7 @@ input, textarea{
 	
 	border: 1px solid #000;
 	border-style: rounded;
+	color: black;
 }
 
 input:focus, textarea:focus{
@@ -195,5 +196,18 @@ button{
 	
 }
 
+fieldset{
+	overflow:hidden;
+	background-color:white;
+	display: block;
+	border: 2px solid black;
+	
+}
 
+legend{
+	background-color:#gray;
+	color:black;
+	padding:5px 10px;
+	
+}
 

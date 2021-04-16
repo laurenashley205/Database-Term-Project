@@ -3,11 +3,11 @@
 ?>
 	
 <!-- Can only be created by admin or super admin if admin, automatically attach the RSO if selected-->
-		
+	<!-- <div class="createEvent"> -->
 		<form action="createEvent.php" method="POST">
 			<input type="text" name="name" placeholder="Event Name">
 			<br>
-			<textarea name="description" placeholder="Give a description"></textarea>
+			<textarea style="color:black" name="desctiption" rows="10" cols="10" placeholder="Enter event details here."></textarea>
 			<input type="text" name="start" placeholder="start time">
 			<input type="text" name="end" placeholder="end time">
 			<input type="text" name="location" placeholder="location">
@@ -25,10 +25,10 @@
 			<p>Private:</p> <input type="radio" name="type" value="Private">
 			<p>RSO:</p> <input type="radio" name="type" value="RSO">
 			<br>
-			<input type="text" name="rsoname" placeholder="Enter RSO">
+			<input type="text" name="r_name" placeholder="Enter RSO">
 			<button type="submit" name="submit">Create</button>
 		</form>
-	
+	<!-- </div> -->
 	
 	<?php
 	include_once 'footer.html';
