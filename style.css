@@ -88,6 +88,12 @@ body{
 	
 }
 
+.rso input[type=button]{
+	width: 60px;
+	height: 40px;
+	
+}
+
 header{
 	margin-right: 350px;
 	float: right;
@@ -128,6 +134,11 @@ input[type=password]{
 	border-bottom: 1px solid black;
 }
 
+input[type=checkbox]{
+	vertical-align: middle;
+	
+}
+
 textarea{
 	resize: none;
 	height: 150px;
@@ -159,6 +170,13 @@ h1{
 	font-size: 40px;
 	text-align: center;
 	text-transform: capitalize;
+}
+
+h2{
+	font-family: alata;
+	font-size: 20px;
+	margin-top: 20px;
+	text-align: left;
 }
 
 ul{
@@ -195,5 +213,17 @@ button{
 	
 }
 
+fieldset{
+	overflow:hidden;
+	background-color:white;
+	display: block;
+	border: 2px solid black;
+	
+}
 
-
+legend{
+	background-color:#gray;
+	color:black;
+	padding:5px 10px;
+	
+}
