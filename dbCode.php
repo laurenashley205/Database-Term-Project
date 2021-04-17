@@ -12,15 +12,22 @@ CREATE table Users (
 CREATE table Events (		//include the email of the user who created the event and the university the user attends 
 	e_id 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,	
 	name		VARCHAR(20)	NOT NULL,
-	category	VARCHAR(20) NOT NULL,	//social, fundraising, tech talk
-    start_date	VARCHAR(20) NOT NULL,
-    end_date	VARCHAR(20) NOT NULL,
-    description	TEXT,
+	description	TEXT,
+    start_date	date,
+    category	VARCHAR(20) NOT NULL,	//social, fundraising, tech talk
     type		VARCHAR(20) NOT NULL,	//can either be public, private, or RSO name 
-	approved	VARCHAR(20) NOT NULL,			//0 if student made it 1 if superadmin approved it
+	approved	VARCHAR(20) NOT NULL,	
 	//email comes from u_id search 
 	//location comes from u_id search 
 	u_id		INT FOREIGN KEY REFERENCES Users(u_id) ON DELETE CASCADE
+);
+
+CREATE table Event_members(
+    ind 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	e_id		INT NOT NULL,
+    u_id 		INT NOT NULL,
+    FOREIGN KEY(e_id) REFERENCES Events(e_id) ON DELETE CASCADE,
+    FOREIGN KEY(u_id) REFERENCES Users(u_id) ON DELETE CASCADE 
 );
 
 CREATE table Comments (			
@@ -34,9 +41,9 @@ CREATE table Comments (
 );
 
 CREATE table Hosts(		//so we can tell if an rso is hosting the event or not 
-	h_id			INT AUTO_INCREMENT NOT NULL PRIMARY KEY
-	r_id 
-	e_id 
+	h_id			INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	r_id 			INT NOT NULL,
+	e_id 			INT NOT NULL,
 	FOREIGN KEY(r_id) REFERENCES Rsos(r_id) ON DELETE CASCADE,
     FOREIGN KEY(e_id) REFERENCES Events(e_id) ON DELETE CASCADE 
 );
@@ -111,3 +118,25 @@ $sql = "SELECT * FROM Users WHERE fname = 'test';";				//gets list of ALL users 
 		
 		<input type="date" id="birthday" name="birthday"><br><br>
 		
+SELECT IF (( SELECT COUNT(r_id) FROM Rso_members) > 4, UPDATE Rsos SET status = 'inactive' WHERE r_id = 3, "NO")
+	
+
+UPDATE Rsos 
+	SET 
+    status = CASE WHEN ((COUNT(r_id) FROM Rso_members) > 4) THEN status = 'active' END,
+    status = CASE WHEN ((COUNT(r_id) FROM Rso_members) < 5) THEN status = 'inactive' END
+    WHERE r_id = 3;
+	
+	
+CREATE table Events (
+	e_id 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,	
+	name		VARCHAR(20)	NOT NULL,
+	description	TEXT,
+    start_date	date,
+    category	VARCHAR(20) NOT NULL,	
+    type		VARCHAR(20) NOT NULL,	
+	approved	VARCHAR(20) NOT NULL,	
+	u_id		INT, 
+    FOREIGN KEY(u_id) REFERENCES Users(u_id) ON DELETE CASCADE
+    )
+   

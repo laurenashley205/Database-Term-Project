@@ -5,7 +5,10 @@
 		exit();
 	}
 ?>
-<h1>Create a new RSO</h1>
+
+<div class="welcome-screen">
+<h2>Create a new RSO</h2>
+</div>
 <div class="form-sheet">
 	<form action="createRso.inc.php" method="POST">
 		<input type="text" name="name" placeholder="RSO Name">

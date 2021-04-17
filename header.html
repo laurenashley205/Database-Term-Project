@@ -19,16 +19,18 @@
 					<?php
 						if(isset($_SESSION["pid"])){
 							echo"<li><a href='index.php'>Home</a></li>";
-							echo "<li><a href='profile.php'>Profile</a></li>";
 							if($_SESSION["status"] === "student"){
 								echo"<li><a href='searchRso.php'>Find RSO </a></li>";
+								echo"<li><a href='searchEvent.php'>Find Event </a></li>";
 							}	
 							else if($_SESSION["status"] === "admin"){
 								echo"<li><a href='searchRso.php'>Find RSO </a></li>";
+								echo"<li><a href='searchEvent.php'>Find Event </a></li>";
 								echo"<li><a href='createRso.php'>Create RSO</a></li>";
 								echo"<li><a href='events.php'>Create Event</a></li>";
 							}	
 							else if($_SESSION["status"] === "superadmin"){
+								echo"<li><a href='searchEvent.php'> Requested Events </a></li>";
 								echo"<li><a href='university.php'>University</a></li>";
 							}
 							echo "<li><a href='logout.inc.php'>Log Out</a></li>";		

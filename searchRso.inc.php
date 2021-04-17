@@ -22,14 +22,14 @@ if(isset($_GET["submit"])){
 	if($_GET["submit"]==="leave"){
 		$name = mysqli_real_escape_string($conn, $_GET["rso"]);
 		LeaveRso($conn,$name,$_SESSION['uid']);
-		header('location: searchRso.php?left'.$name);
+		header('location: searchRso.php?left='.$name);
 			exit();
 		
 	}
 	if($_GET["submit"]==="join"){
 		$name = mysqli_real_escape_string($conn, $_GET["rso"]);
 		JoinRso($conn,$name,$_SESSION["uid"]);
-		header('location: searchRso.php?joined'.$name);
+		header('location: searchRso.php?joined='.$name);
 			exit();
 	}
 	if(isset($_GET["rsotype"])){	//array that holds whatever boxes were checked 
@@ -45,7 +45,6 @@ if(isset($_GET["submit"])){
 				$i +=1;
 			}
 			header('location: searchRso.php?filters='.$filters[0] . "&filters1=" .$filters[1]);
-			echo "just a test";
 			exit();
 		}
 		else if($numFilters === 1){

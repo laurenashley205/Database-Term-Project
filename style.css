@@ -112,7 +112,14 @@ option{
 }
 
 form{
-	width: 300px;
+	width: 500px;
+}
+
+label{
+	color:black;
+	font-family: Acme;
+	margin-top: 20px;
+	
 }
 
 input{
@@ -140,9 +147,11 @@ input[type=checkbox]{
 }
 
 textarea{
+	margin-top:20px;
 	resize: none;
 	height: 150px;
 	width: 315px;
+	color: black;
 }
 
 input, textarea{
