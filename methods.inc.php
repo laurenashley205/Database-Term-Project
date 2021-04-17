@@ -211,6 +211,79 @@ function DisplayGroups($conn,$uid){
 		}
 }
 
+function DisplayRsoEvents($conn,$uid){	
+	$sql = "SELECT E.name 
+	FROM events E, Users U, Rso_members M, Rsos R
+	WHERE $uid = U.u_id
+	AND U.u_id = M.u_id
+	AND M.r_id = R.r_id
+	AND E.r_id = R.r_id;";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				echo "<p> " .$row['name'] . "</p>";
+			}
+		}
+}
+
+function DisplayRsoEventInfo($conn,$uid){	
+	$sql = "SELECT E.* 
+	FROM events E, Users U, Rso_members M, Rsos R
+	WHERE $uid = U.u_id
+	AND U.u_id = M.u_id
+	AND M.r_id = R.r_id
+	AND E.r_id = R.r_id;";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				// <h1 style="color: black; font-family: alata;font-size: 20px;text-align: center;">RSO EVENTS</h1>
+				// echo "<div class = "general-screen"";
+				echo "<p>NAME: " .$row['name'] . "</p>";
+				echo "<br>";
+				echo "<p>Description:  " .$row['description'] ."</p>";
+				echo "<p>Start:  " .$row['start_date'] . "</p>";
+				echo "<p>End:  " .$row['end_date'] ."</p>";
+				echo "<p>Location: "  .$row['location'] ."</p>";
+				echo "<p>Contact: "  .$row['email'] ."</p>";
+				echo "<p>Category: "  .$row['category'] ."</p>";
+				echo "<p>Event type: "  .$row['type'] ."</p>";
+				// echo "</div>";
+				echo "<p align=center> _________________________________________________________________ </p>";
+				echo "<br><br><br><br><br>";
+			}
+		}
+}
+
+function DisplayUniEvents($conn,$uid){		
+	$sql = "SELECT E.name 
+	FROM events E, Users U 
+	WHERE $uid = U.u_id
+	AND U.university = E.location;";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				echo "<p> " .$row['name'] . "</p>";
+			}
+		}
+}
+
+function DisplayPublicEvents($conn,$uid){	
+	$sql = "SELECT E.name 
+	FROM events E, Users U 
+	WHERE $uid = U.u_id
+	AND E.type = 'Public'";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				echo "<p> " .$row['name'] . "</p>";
+			}
+		}
+}
+
 function showAvailableRso($conn,$uni){
 	
 	

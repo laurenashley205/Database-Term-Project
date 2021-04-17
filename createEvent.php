@@ -1,7 +1,6 @@
       
 <?php
 	include_once 'connect.php';
-	// include 'methods.php';
 	include 'methods.inc.php';
 	
 	$e_id = RandomNum();
@@ -59,14 +58,14 @@
 CREATE TABLE events (
 	e_id 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	name		VARCHAR(20)	NOT NULL,
-	description	TEXT,
+	description	VARCHAR(100) NOT NULL,
 	start_date	VARCHAR(20) NOT NULL,
     end_date	VARCHAR(20) NOT NULL,
-	location    VARCHAR(100) NOT NULL,
-	email       VARCHAR(100) NOT NULL,
+	location    VARCHAR(20) NOT NULL,
+	email       VARCHAR(50) NOT NULL,
 	category	VARCHAR(20) NOT NULL,
 	type		VARCHAR(20) NOT NULL,
-	r_name		VARCHAR(50),
+	r_name		VARCHAR(30),
 	r_id		INT,
 	FOREIGN KEY (r_id) REFERENCES Rsos(r_id)
 ) -->

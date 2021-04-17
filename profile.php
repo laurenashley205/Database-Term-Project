@@ -8,6 +8,8 @@
 	}
 ?>
 <div class="general-screen">
+<br><br><br>
+	<h1 style="color: black; font-family: alata;font-size: 40px;text-align: center;">User Information</h1>
 	<?php
 		echo "<p>Name: " .$_SESSION["name"] . " "  .$_SESSION["lastName"] ."</p>";
 		echo "<p>Email:  " .$_SESSION["email"] ."</p>";
@@ -15,17 +17,56 @@
 		echo "<p>PID:  " .$_SESSION["pid"] ."</p>";
 		echo "<p>User Status: "  .$_SESSION["status"] ."</p>";
 	?>
-	
+	<br><br><br>
+</div>
+<br><br><br>
+<div class = "general-screen">
+	<br><br><br>
 	<h1 style="color: black; font-family: alata;font-size: 40px;text-align: center;">Joined Groups</h1>
 	<?php
 		DisplayGroups($conn,$_SESSION["uid"]);
 	?>
+	<br><br><br>
+</div>
+<br><br><br>
+<div class = "general-screen">
+	<br><br><br>
 	<h1 style="color: black; font-family: alata;font-size: 40px;text-align: center;">Upcoming Events</h1>
+	<br><br><br>
+	<h2 style="color: black; font-family: alata;font-size: 30px;text-align: center;">RSO Events</h2>
 	<?php
-		//DisplayEvents($conn,);
+		DisplayRsoEvents($conn, $_SESSION["uid"]);
 		//Use display groups as a skeleton for this 
 	?>
-		
+	<div class = "form-sheet">
+		<form action="viewEvent.php">
+    		<input type="submit" value="View RSO Events" />
+		</form>
+	</div>
+	<br><br><br>
+	<h2 style="color: black; font-family: alata;font-size: 30px;text-align: center;">University Events</h2>
+	<?php
+		DisplayUniEvents($conn, $_SESSION["uid"]);
+		//Use display groups as a skeleton for this 
+	?>
+	<div class = "form-sheet">
+		<form action="viewEvent.php">
+    		<input type="submit" value="View University Events" />
+		</form>
+	</div>
+	<br><br><br>
+	<h2 style="color: black; font-family: alata;font-size: 30px;text-align: center;">All Public Events</h2>
+	<?php
+		DisplayPublicEvents($conn, $_SESSION["uid"]);
+		//Use display groups as a skeleton for this 
+	?>
+	<div class = "form-sheet">
+		<form action="viewEvent.php">
+    		<input type="submit" value="View Public Events" />
+		</form>
+		<br><br><br>
+	</div>
+	
 </div>
 
 

@@ -55,6 +55,17 @@ body{
 	
 }
 
+.view-event-form a{
+	color: black;
+	font-family: Calibri;
+	margin-top: 40px;
+	margin-left: 140px;
+	padding: 1px 5px 1px 5px;
+	border: 1px solid grey;
+	text-decoration: none;
+	background-color: #f1f1f1;
+}
+
 .welcome-screen{
 	background-color: #f1f1f1;
 	border: 5px inset #1e1e1e;
@@ -196,18 +207,5 @@ button{
 	
 }
 
-fieldset{
-	overflow:hidden;
-	background-color:white;
-	display: block;
-	border: 2px solid black;
-	
-}
 
-legend{
-	background-color:#gray;
-	color:black;
-	padding:5px 10px;
-	
-}
 

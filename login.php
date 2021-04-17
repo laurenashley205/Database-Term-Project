@@ -11,7 +11,8 @@
 		<br>
 		<button type="submit" name="submit">Log In</button>
 		<h3 style="color: black; font-family: Alata; padding: 10px 0 10px 0; margin-left: 125px;">New User?</h3>
-		<a style="margin-left:130px; href="signup.php">Sign Up</a>
+		<a href="signup.php">Sign Up</a>
+		<!-- <a style="margin-left:130px; href="signup.php">Sign Up</a> -->
 		<br><br>
 	</form>
 	<?php
