@@ -17,10 +17,10 @@
 
 <div class="general-screen">
 	<br><br><br>
-	<h1 style="color: black; font-family: alata;font-size: 20px;text-align: center;">RSO EVENTS</h1>
+	<h1 style="color: black; font-family: alata;font-size: 20px;text-align: center;">UNIVERSITY EVENTS</h1>
     <br><br><br>
 	<?php
-		DisplayRsoEventInfo($conn,$_SESSION["uid"]);
+		DisplayUniEventInfo($conn,$_SESSION["uid"]);
 	?>
 
 </div>

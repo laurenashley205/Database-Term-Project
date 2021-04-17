@@ -256,6 +256,86 @@ function DisplayRsoEventInfo($conn,$uid){
 		}
 }
 
+function DisplayUniEventInfo($conn,$uid){	
+	$sql = "SELECT E.name 
+	FROM events E, Users U 
+	WHERE $uid = U.u_id
+	AND U.university = E.location;";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				// <h1 style="color: black; font-family: alata;font-size: 20px;text-align: center;">RSO EVENTS</h1>
+				// echo "<div class = "general-screen"";
+				echo "<p>NAME: " .$row['name'] . "</p>";
+				echo "<br>";
+				echo "<p>Description:  " .$row['description'] ."</p>";
+				echo "<p>Start:  " .$row['start_date'] . "</p>";
+				echo "<p>End:  " .$row['end_date'] ."</p>";
+				echo "<p>Location: "  .$row['location'] ."</p>";
+				echo "<p>Contact: "  .$row['email'] ."</p>";
+				echo "<p>Category: "  .$row['category'] ."</p>";
+				echo "<p>Event type: "  .$row['type'] ."</p>";
+				// echo "</div>";
+				echo "<p align=center> _________________________________________________________________ </p>";
+				echo "<br><br><br><br><br>";
+
+				// comment();
+			}
+		}
+}
+
+function DisplayPublicEventInfo($conn,$uid){	
+	$sql = "SELECT E.name 
+	FROM events E, Users U 
+	WHERE $uid = U.u_id
+	AND E.type = 'Public'";
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			while($row = mysqli_fetch_assoc($result)){
+				// <h1 style="color: black; font-family: alata;font-size: 20px;text-align: center;">RSO EVENTS</h1>
+				// echo "<div class = "general-screen"";
+				echo "<p>NAME: " .$row['name'] . "</p>";
+				echo "<br>";
+				echo "<p>Description:  " .$row['description'] ."</p>";
+				echo "<p>Start:  " .$row['start_date'] . "</p>";
+				echo "<p>End:  " .$row['end_date'] ."</p>";
+				echo "<p>Location: "  .$row['location'] ."</p>";
+				echo "<p>Contact: "  .$row['email'] ."</p>";
+				echo "<p>Category: "  .$row['category'] ."</p>";
+				echo "<p>Event type: "  .$row['type'] ."</p>";
+				// echo "</div>";
+				echo "<p align=center> _________________________________________________________________ </p>";
+				echo "<br><br><br><br><br>";
+
+				// comment($conn);
+			}
+		}
+}
+
+// function comment($conn){
+// 	<textarea style="color:black" name="comment" rows="10" cols="10" placeholder="Comment on event."></textarea>
+// 	CREATE table Comments ( 		
+// 		c_id 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+// 		comment TEXT,
+// 		e_id	INT,
+// 		FOREIGN KEY (e_id) REFERENCES events(e_id)
+// 	);
+// 	$sql = "INSERT INTO Comments (c_id, comment, e_id)
+// 	VALUES (?,?,?);";
+// 	$stmt = mysqli_stmt_init($conn);
+// 	if(!mysqli_stmt_prepare($stmt,$sql)){
+// 		header("location: profile.php?error=stmtfailed");
+// 		exit();
+// 	}
+// 	mysqli_stmt_bind_param($stmt,"sss",$c_id, $comment, $e_id);
+// 	mysqli_stmt_execute($stmt);
+// 	mysqli_stmt_close($stmt);
+// 	UpdateRsoStatus($conn,$rid);
+// }
+
+
 function DisplayUniEvents($conn,$uid){		
 	$sql = "SELECT E.name 
 	FROM events E, Users U 

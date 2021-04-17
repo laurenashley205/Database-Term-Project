@@ -39,7 +39,7 @@
 		//Use display groups as a skeleton for this 
 	?>
 	<div class = "form-sheet">
-		<form action="viewEvent.php">
+		<form action="viewRsoEvent.php">
     		<input type="submit" value="View RSO Events" />
 		</form>
 	</div>
@@ -50,7 +50,7 @@
 		//Use display groups as a skeleton for this 
 	?>
 	<div class = "form-sheet">
-		<form action="viewEvent.php">
+		<form action="viewUniEvent.php">
     		<input type="submit" value="View University Events" />
 		</form>
 	</div>
@@ -61,7 +61,7 @@
 		//Use display groups as a skeleton for this 
 	?>
 	<div class = "form-sheet">
-		<form action="viewEvent.php">
+		<form action="viewPublicEvent.php">
     		<input type="submit" value="View Public Events" />
 		</form>
 		<br><br><br>
