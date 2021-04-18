@@ -3,7 +3,7 @@
 // (ex, all rso events, all uni events, all public events)
 // can comment on each event there
 
-// this or search event similar to search rso, idk yet ah
+// this or search event similar to search rso, idk yet
 
 <?php
 	include_once 'header.html';
@@ -22,6 +22,8 @@
 	<?php
 		DisplayRsoEventInfo($conn,$_SESSION["uid"]);
 	?>
+	<textarea style="color:black; text-align: center; float: center;" name="comment" rows="10" cols="10" placeholder="Comment on an event."></textarea>
+
 
 </div>
 

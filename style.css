@@ -55,7 +55,7 @@ body{
 	
 }
 
-.view-event-form a{
+/* .view-event-form a{
 	color: black;
 	font-family: Calibri;
 	margin-top: 40px;
@@ -64,7 +64,7 @@ body{
 	border: 1px solid grey;
 	text-decoration: none;
 	background-color: #f1f1f1;
-}
+} */
 
 .welcome-screen{
 	background-color: #f1f1f1;
@@ -99,6 +99,49 @@ body{
 	
 }
 
+.general-screen textarea{
+	width: 400px;
+	height: 80px;
+	padding: 1px 5px 1px 5px;
+}
+
+.general-screen button{
+	width: 100px;
+	height: 30px;
+	background-color: #282828;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.comment-screen {
+	width:815px;
+	/* width:40; */
+	padding: 50px;
+	border-radius: 25px;
+	background-color: #FFF;
+	/* margin-bottom:4px; */
+	/* border-radius:4px; */
+}
+
+.comment-screen p {
+	font-family: Acme;
+	color: black;
+	font-size: 20px;
+	padding: 20px;
+	
+}
+
+/* .new-event-screen {
+	
+} */
+
+.rso input[type=button]{
+	width: 60px;
+	height: 40px;
+	
+}
+
 header{
 	margin-right: 350px;
 	float: right;
@@ -120,6 +163,13 @@ form{
 	width: 300px;
 }
 
+label{
+	color:black;
+	font-family: Acme;
+	margin-top: 20px;
+	
+}
+
 input{
 	width: 100%;
 	padding: 10px;
@@ -139,17 +189,24 @@ input[type=password]{
 	border-bottom: 1px solid black;
 }
 
+input[type=checkbox]{
+	vertical-align: middle;
+	
+}
+
 textarea{
+	margin-top:20px;
 	resize: none;
 	height: 150px;
 	width: 315px;
+	color: black;
 }
 
 input, textarea{
 	
 	border: 1px solid #000;
 	border-style: rounded;
-	color: black;
+	/* color: black; */
 }
 
 input:focus, textarea:focus{
@@ -171,6 +228,13 @@ h1{
 	font-size: 40px;
 	text-align: center;
 	text-transform: capitalize;
+}
+
+h2{
+	font-family: alata;
+	font-size: 20px;
+	margin-top: 20px;
+	text-align: left;
 }
 
 ul{
@@ -207,5 +271,18 @@ button{
 	
 }
 
+fieldset{
+	overflow:hidden;
+	background-color:white;
+	display: block;
+	border: 2px solid black;
+	
+}
 
+legend{
+	background-color: gray;
+	color:black;
+	padding: 5px 10px;
+	
+}
 
