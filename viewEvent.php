@@ -42,13 +42,34 @@
                 }
             }
 
+			// $u_id = getUserId($conn, $$_SESSION["uid"]);
+			// $e_id = getEventId($conn, $name);
+
+			// getUserId($conn, $uid){
+// 	$sql = "SELECT u_id FROM users WHERE users.u_id = $uid;";		
+// 		$result = mysqli_query($conn, $sql);
+// 		return $result;
+// 		// $resultCheck = mysqli_num_rows($result);
+// 		// if($resultCheck > 0){
+// 		// 	while($row = mysqli_fetch_assoc($result)){
+// 		// 		return $
+// 		// 	}
+// 		// }
+// }
+
+// getEventId($conn, $name){
+// 	$sql = "SELECT e_id FROM events 
+// 		WHERE events.e_id = $name;";		
+// 		$result = mysqli_query($conn, $sql);
+// 		return $result;
+// }
+
 			
 
 //    echo "<form action='".setComments($conn)."' method='POST'>
    echo "<form action='postComment.inc.php' method='POST'>
         <p style='text-align: center'> Comment </p>
-        // <input type='hidden' name='u_id' value='Anonymous'>
-        <input type='hidden' name='e_id' value='" .$name. "'>
+      
         <textarea style='background-color:white; width=100%' name='comment' placeholder='Comment on Event'></textarea>
         <br><br><br>
         <button type='submit' name='submit-comment'>Comment</button>
@@ -69,3 +90,7 @@
 <?php
 	include_once 'footer.html';
 ?>
+
+
+// <input type='hidden' name='u_id' value='".$u_id."'>
+        // <input type='hidden' name='e_id' value='" .$e_id. "'>

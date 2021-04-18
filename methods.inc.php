@@ -375,17 +375,20 @@ function DisplayPublicEventInfo($conn,$uid){
 // 	mysqli_stmt_close($stmt);
 // }
 
+
+
 function setComments($conn){
 	if(isset($_POST["submit-comment"])){
 		$comment = $_POST['comment'];
-		$u_id = $_POST['u_id'];
-		$e_id = $_POST['e_id'];
+		// $u_id = $_POST['u_id'];
+		// $e_id = $_POST['e_id'];
 
 		$comment = mysqli_real_escape_string($conn, $_POST['comment']);
-		$u_id = mysqli_real_escape_string($conn, $_POST['u_id']);
-		$e_id = mysqli_real_escape_string($conn, $_POST['e_id']);
+		// $u_id = mysqli_real_escape_string($conn, $_POST['u_id']);
+		// $e_id = mysqli_real_escape_string($conn, $_POST['e_id']);
 			
-		$sql = "INSERT INTO Comments (comment, u_id, e_id) VALUES (?,?,?);";
+		// $sql = "INSERT INTO Comments (comment, u_id, e_id) VALUES (?,?,?);";
+		$sql = "INSERT INTO Comments (comment) VALUES (?);";
 
 
 		$stmt = mysqli_stmt_init($conn);
@@ -395,8 +398,8 @@ function setComments($conn){
 	   		exit();
 	   		// echo "SQL ERROR!";
    		} else{
-	  		mysqli_stmt_bind_param($stmt,"sss", $comment, $u_id, $e_id);
-            //   mysqli_stmt_bind_param($stmt,"ss", $comment);
+	  		// mysqli_stmt_bind_param($stmt,"sss", $comment, $u_id, $e_id);
+              mysqli_stmt_bind_param($stmt,"s", $comment);
 
 	   		mysqli_stmt_execute($stmt);
 	   		mysqli_stmt_close($stmt);
