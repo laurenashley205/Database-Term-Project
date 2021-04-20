@@ -1,54 +1,9 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+* {
+	font-family: alata;
+	color: #FFF;
+	
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
-/*Can change under this*/
 
 body{
 	background-color: #1e1e1e;
@@ -56,31 +11,208 @@ body{
 
 .wrapper {
 	
-	margin: 0 auto;
+	margin: 50px auto;
 	width: 1000px;
+}
+.form-sheet{
+	margin-top: 20px;
+	background-color: #FFF;
+	padding:20px;
+	padding-left:400px;
+	border-radius: 25px;
+		
+}
+
+.form-sheet p{
+	color: red;
+	font-size: 20px;
+}
+
+.form-sheet h2{
+	color: black;
+	font-family: alata;
+	padding-top: 20px;
+	padding-left: 70px;
+	padding-bottom:20px;
+}
+
+.form-sheet h3{
+	color: black;
+	font-family: alata;
+	padding-top: 20px;
+	padding-bottom:20px;
+}
+
+.form-sheet a{
+	color: black;
+	font-family: Calibri;
+	margin-top: 40px;
+	margin-left: 140px;
+	padding: 1px 5px 1px 5px;
+	border: 1px solid grey;
+	text-decoration: none;
+	background-color: #f1f1f1;
+	
+}
+
+/* .view-event-form a{
+	color: black;
+	font-family: Calibri;
+	margin-top: 40px;
+	margin-left: 140px;
+	padding: 1px 5px 1px 5px;
+	border: 1px solid grey;
+	text-decoration: none;
+	background-color: #f1f1f1;
+} */
+
+.welcome-screen{
+	background-color: #f1f1f1;
+	border: 5px inset #1e1e1e;
+	
+}
+
+.welcome-screen p{
+	font-family: Acme;
+	color: black;
+	font-size: 20px;
+	margin: 10px;
+}
+
+.welcome-screen h2{
+	font-family: Acme;
+	color: black;
+	font-size: 40px;
+	text-align: center;
+}
+/* 
+.general-screen{
+	border-radius: 25px;
+	background-color: #FFF;
+}
+
+.general-screen p {
+	font-family: Acme;
+	color: black;
+	font-size: 20px;
+	padding: 20px;
+	
+}
+
+.general-screen textarea{
+	width: 400px;
+	height: 80px;
+	padding: 1px 5px 1px 5px;
+} */
+
+.general-screen button{
+	width: 100px;
+	height: 30px;
+	background-color: #282828;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.comment-screen {
+	width:815px;
+	/* width:40; */
+	padding: 50px;
+	border-radius: 25px;
+	background-color: #FFF;
+	/* margin-bottom:4px; */
+	/* border-radius:4px; */
+}
+
+.comment-screen p {
+	font-family: Acme;
+	color: black;
+	font-size: 20px;
+	padding: 20px;
+	
+}
+
+/* .new-event-screen {
+	
+} */
+
+.rso input[type=button]{
+	width: 60px;
+	height: 40px;
+	
+}
+
+header{
+	margin-right: 350px;
+	float: right;
+}
+
+select{
+	width: 50%;
+	color: black;
+	background-color: #f1f1f1;
+	
+}
+
+option{
+	color:black;
+	
 }
 
 form{
 	width: 300px;
 }
 
+label{
+	color:black;
+	font-family: Acme;
+	margin-top: 20px;
+	
+}
+
 input{
 	width: 100%;
+	padding: 10px;
+	color: black;
+	
+}
+
+input[type=text]{
+	
+	border:none;
+	border-bottom: 1px solid black;
+}
+
+input[type=password]{
+	
+	border:none;
+	border-bottom: 1px solid black;
+}
+
+input[type=checkbox]{
+	vertical-align: middle;
+	
 }
 
 textarea{
-	resize: vertical;
-	max-height: 150px;
+	margin-top:20px;
+	resize: none;
+	height: 150px;
+	width: 315px;
+	color: black;
 }
 
 input, textarea{
-	outline: none;
-	border: 1px solid #ddd;
+	
+	border: 1px solid #000;
+	border-style: rounded;
+	/* color: black; */
 }
 
 input:focus, textarea:focus{
-	box-shadow: 0 0 4px rgba(255,223,0,0.7);
-	border: 1px solid #ddd;
+	outline: none;
+	box-shadow: 0 0 4px rgba(194,197,204,0.7);
+	
 }
 
 nav{
@@ -92,21 +224,22 @@ nav{
 }
 
 h1{
-	font-family: arial;
-	font-size: 20px;
-	text-align: left;
+	font-family: Acme;
+	font-size: 40px;
+	text-align: center;
 	text-transform: capitalize;
-	color: #FFF;
 }
 
-
-p{
-	font-family: arial;
-	color: #FFF;
+h2{
+	font-family: alata;
+	font-size: 20px;
+	margin-top: 20px;
+	text-align: left;
 }
 
 ul{
 	margin-left: -20px;
+	float: left;
 }
 
 ul li{
@@ -120,11 +253,36 @@ ul li a{
 	text-decoration: none;
 	font-size: 15px;
 	font-family: Calibri;
-	color: #FFF;
 	padding: 0 20px;
+	
 	
 }
 
 ul li a:hover{
 	color: gold;
 }
+
+button{
+	font-family: Calibri;
+	margin-left: 135px;
+	margin-top: 10px;
+	color: black;
+	border-style: rounded;
+	
+}
+
+fieldset{
+	overflow:hidden;
+	background-color:white;
+	display: block;
+	border: 2px solid black;
+	
+}
+
+legend{
+	background-color: gray;
+	color:black;
+	padding: 5px 10px;
+	
+}
+
