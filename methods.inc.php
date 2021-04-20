@@ -441,19 +441,97 @@ function showAvailableEvents($conn,$uni){
 	$resultCheck = mysqli_num_rows($result);
 	if($resultCheck > 0){
 		while($row = mysqli_fetch_assoc($result)){
-			echo  "<h2>Name: \t" .$row["name"] .  "<br> Type: \t"  . $row["category"] . "</h2>";
 			$name = $row["name"];
-			echo  "<a href='searchEvent.php?more=$name'><h2 style='margin-top: 0px;'> See Event </h2></a>";
+			echo  "<a href='searchEvent.php?more=$name'><h2 style='margin-top: 0px;'>".$name. " </h2></a>";			
 		}
 	}	
 }
 
-function showSingleEvent($conn,$event){
-	$row = EventExists($conn,$event);
-	echo  "<h2>Name: \t" .$row["name"] .  "<br> Type: \t"  . $row["category"] . 
-					" <br> Description: \t" .$row["description"] .  "<br> Date: \t"  . $row["date"] ."</h2>";
-	//Post all of the comments that belong to that event here
+function showAvailableEventsAdmin($conn,$uni){
+	$sql = "SELECT DISTINCT name, category FROM Events
+		INNER JOIN Users ON Users.university = 'ucf'
+		AND Events.approved = 'unapproved';";		
+	$result = mysqli_query($conn, $sql);
+	$resultCheck = mysqli_num_rows($result);
+	if($resultCheck > 0){
+		while($row = mysqli_fetch_assoc($result)){
+			echo  "<h2>Name: \t" .$row["name"] .  "<br> Type: \t"  . $row["category"] . "</h2>";
+			$name = $row["name"];
+			echo  "<a href='superAdminEvents.php?more=$name'><h2 style='margin-top: 0px;'> Select Event </h2></a>";
+		}
+	}	
+}
+
+function  GetEmail($conn,$u_id){
+	$sql = "SELECT * FROM Users WHERE u_id = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: searchEvent.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"s",$u_id);
+	mysqli_stmt_execute($stmt);
 	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if($row = mysqli_fetch_assoc($resultData)){
+		return $row;
+	}
+	else{
+		$result = false;
+		return $result;
+	}
+	mysqli_stmt_close($stmt);
+	
+}
+
+function showSingleEvent($conn,$event,$uid){
+	$row = EventExists($conn,$event);
+	$emailGrab = GetEmail($conn,$row['u_id']);
+	$email = $emailGrab["email"];
+	echo  "<h2>Name: \t" .$row["name"] .  "<br> Type: \t"  . $row["category"] . 
+					" <br> Description: \t" .$row["description"] .  "<br> Date: \t"  . $row["date"] .
+					  "<br> Contact Email: \t"  . $email ."</h2>";
+	//Post all of the comments that belong to that event here
+	GetComments($conn,$row["e_id"],$uid);
+}
+
+function GetComments($conn,$eid,$uid){
+	$sql = "SELECT * FROM Comments WHERE e_id = $eid;";				
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($result);
+		if($resultCheck > 0){
+			echo "<h2>Comments:</h2>";
+			while($row = mysqli_fetch_assoc($result)){
+				$nameGrab = GetEmail($conn,$row["u_id"]);
+				$fName = $nameGrab["fname"];
+				$lName = $nameGrab["lname"];
+				echo  "<h2>User: \t" .$fName ."\t" .$lName .  "<br>Rating: \t"  . $row["rating"] . 
+					"/5 \t <br><br> Date: \t"  . $row["date"] ."</h2>";
+				if($uid == $row["u_id"]){
+					$cid = $row["c_id"];
+					echo  "<a href='editComment.php?update=$cid'><h2 style='padding-left: 15px;width: 5%;margin-top: 5px; font-size: 15px; color: black; background-color: gold;'> Edit </h2></a>";
+					echo  "<a href='editComment.php?delete=$cid'><h2 style='padding-left: 15px;width: 5%;margin-top: 5px; font-size: 15px; color: black; background-color: gold;'> Delete </h2></a>";
+				}
+				echo "<h5>" .$row['comment'] . "</h5>";
+				
+			}
+		}
+}
+
+function CommentEvent($conn,$name,$comment,$rating,$uid,$eid){
+	$sql = "INSERT INTO Comments (comment,rating,u_id,e_id)
+	VALUES (?,?,?,?);";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: searchEvent.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"ssss",$comment,$rating,$uid,$eid);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_close($stmt);
+	header("location: searchEvent?error=none");
+		exit();	
 }
 
 function GetEid($conn,$name){
@@ -544,4 +622,158 @@ function JoinEvent($conn,$name,$uid){
 		header("location: searchEvent.php?error=alreadymember");
 			exit();
 	}
+}
+
+function CreateUni($conn,$name,$numStudents,$description,$location){
+	$sql = "INSERT INTO Universities (name,numStudents,description,location)
+	VALUES (?,?,?,?);";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: university.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"ssss",$name,$numStudents,$description,$location);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_close($stmt);
+}
+
+function UniExists($conn,$name){
+	$sql = "SELECT * FROM Universities WHERE name = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: university.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"s",$name);
+	mysqli_stmt_execute($stmt);
+	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if($row = mysqli_fetch_assoc($resultData)){
+		return $row;
+	}
+	else{
+		$result = false;
+		return $result;
+	}
+	mysqli_stmt_close($stmt);
+	
+}
+	
+function deleteEvent($conn,$name){
+	$sql = "DELETE FROM Events
+	WHERE Events.name = $eventName;";		
+	$result = mysqli_query($conn, $sql);
+	header("location: superAdminEvents.php?deleted=".$name);
+		exit();
+}
+
+function updateEvent($conn,$name){
+	$sql = "UPDATE Events SET approved = 'approved' WHERE name = '$name';";
+		$result = mysqli_query($conn, $sql);
+	header("location: superAdminEvents.php?updated=".$name);
+		exit();
+}
+
+function CommentExists($conn,$cid){
+	$sql = "SELECT * FROM Comments WHERE c_id = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: signup.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"s",$cid);
+	mysqli_stmt_execute($stmt);
+	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if($row = mysqli_fetch_assoc($resultData)){
+		return $row;
+	}
+	else{
+		$result = false;
+		return $result;
+	}
+	mysqli_stmt_close($stmt);
+}
+
+function DeleteComment($conn,$cid){
+	$sql = "DELETE FROM Comments
+	WHERE Comments.c_id = $cid;";		
+	$result = mysqli_query($conn, $sql);
+	$resultCheck = mysqli_num_rows($result);
+}
+
+function UpdateComment($conn,$cid,$comment){
+	$sql = "UPDATE Comments SET comment = '$comment' WHERE c_id = $cid;";
+		$result = mysqli_query($conn, $sql);
+	header("location: searchEvent.php");
+		exit();
+}
+
+function EventConflict($conn,$date,$uid,$uni){
+	$sql = "SELECT * FROM Events 
+	INNER JOIN Users ON Users.u_id = ?
+	WHERE Events.date = ? AND Users.university = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: events.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"sss",$uid,$date,$uni);
+	mysqli_stmt_execute($stmt);
+	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if($row = mysqli_fetch_assoc($resultData)){
+		return $row;
+	}
+	else{
+		$result = false;
+		return $result;
+	}
+	mysqli_stmt_close($stmt);
+}
+
+function SetOwnership($conn,$email,$rid){
+	$emailExists = EmailExists($conn,$email);
+	$u_id = $emailExists["u_id"];	
+		$sql = "INSERT INTO Owns (r_id, u_id)
+	VALUES (?,?);";
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: createRso.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"ss",$rid, $u_id);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_close($stmt);
+}
+
+function AdminofRSO($conn,$rsotype,$uid){
+	$rsoInfo = RsoExists($conn,$rsotype);
+	$rid = $rsoInfo["r_id"];
+	
+	$sql = "SELECT * FROM Owns
+	WHERE r_id = ? AND u_id = ?;";
+			
+	$stmt = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($stmt,$sql)){
+		header("location: events.php?error=stmtfailed");
+		exit();
+	}
+	mysqli_stmt_bind_param($stmt,"ss",$rid,$uid);
+	mysqli_stmt_execute($stmt);
+	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if($row = mysqli_fetch_assoc($resultData)){
+		
+		return $row;
+	}
+	else{
+		$result = false;
+		return $result;
+	}
+	mysqli_stmt_close($stmt);
 }

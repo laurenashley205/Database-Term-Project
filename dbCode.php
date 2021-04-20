@@ -31,13 +31,14 @@ CREATE table Event_members(
 );
 
 CREATE table Comments (			
-	c_id			INT AUTO_INCREMENT NOT NULL PRIMARY KEY
+	c_id		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	comment   	TEXT NOT NULL,
 	rating		INT NOT NULL,
-	date		DATE NOT NULL,
-	u_id		INT FOREIGN KEY REFERENCES Users(u_id) ON DELETE CASCADE
-	e_id		INT FOREIGN KEY REFERENCES Events(e_id) ON DELETE CASCADE
-	
+	date		DATE DEFAULT getdate(),
+	u_id		INT, 
+	e_id		INT,
+    FOREIGN KEY(u_id) REFERENCES Users(u_id) ON DELETE CASCADE,
+    FOREIGN KEY (e_id)REFERENCES Events(e_id) ON DELETE CASCADE
 );
 
 CREATE table Hosts(		//so we can tell if an rso is hosting the event or not 
@@ -55,6 +56,14 @@ CREATE table Rsos (		//include the university the admin attends. To find a list 
     status 		VARCHAR(10) NOT NULL //either active or inactive 
 );
 
+CREATE table Owns (		
+	ind			INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	r_id 		INT NOT NULL,
+	 u_id 		INT NOT NULL,
+    FOREIGN KEY(r_id) REFERENCES Rsos(r_id) ON DELETE CASCADE,
+    FOREIGN KEY(u_id) REFERENCES Users(u_id) ON DELETE CASCADE 
+);
+
 CREATE table Rso_members(
     ind 		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	r_id		INT NOT NULL,
@@ -63,11 +72,12 @@ CREATE table Rso_members(
     FOREIGN KEY(u_id) REFERENCES Users(u_id) ON DELETE CASCADE 
 );
 
-CREATE table Universities(		//has rso's, events, super admin 
+CREATE table Universities(		
 	uni_id		INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	name		VARCHAR(20) NOT NULL,
-	num_students INT NOT NULL,	//everytime someone signs up under that uni this value increases
-	picture**********************************************
+	num_students INT NOT NULL,	
+	description	TEXT,
+	location	VARCHAR(30)
 );
 
 CREATE trigger RSOStatusUpdateP

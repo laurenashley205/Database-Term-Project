@@ -19,6 +19,17 @@ if(isset($_GET["submit"])){
 		header("location: searchEvent.php");
 			exit();
 	}
+	if($_GET["submit"]==="comment"){
+		$name = mysqli_real_escape_string($conn, $_GET["event"]);
+		if(EventExists($conn,$name)!== false){
+			header('location:commentEvent.php?event='.$name);
+			exit();
+		}
+		else{
+			header("location: searchEvent.php?error=noevent");
+			exit();
+		}		
+	}
 	if($_GET["submit"]==="leave"){
 		$name = mysqli_real_escape_string($conn, $_GET["event"]);
 		LeaveEvent($conn,$name,$_SESSION['uid']);

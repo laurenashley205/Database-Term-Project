@@ -18,6 +18,12 @@
 				else if($_GET["error"]=="inactiverso"){
 					echo "<p>That rso is currently inactive!</p>";
 				}
+				else if($_GET["error"]=="timetaken"){
+					echo "<p>There is already an event at that time!</p>";
+				}
+				else if($_GET["error"]=="notAdmin"){
+					echo "<p>You are not the owner of this RSO!</p>";
+				}
 			}
 			?>
 			<input type="text" name="name" placeholder="Event Name">

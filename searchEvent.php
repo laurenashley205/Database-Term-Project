@@ -22,6 +22,7 @@
 		<input style="background-color: #f1f1f1; width:100%; margin-left: -70px; margin-top:20px; border:1px solid black;" type="text" name="event" placeholder="Event Name">
 		<button style="background-color: #f1f1f1; margin-left: 30px; margin-bottom: 20px; background-color: white;" type="submit" name="submit" value="join">Join</button>
 		<button style="background-color: #f1f1f1;margin-left: 10px; background-color: white;" type="submit" name="submit" value="leave">Leave</button>
+		<button style="background-color: #f1f1f1; margin-left: 90px; margin-bottom: 20px; background-color: white;" type="submit" name="submit" value="comment">Comment</button>
 		<?php
 			if(isset($_GET["error"])){
 				if($_GET["error"]=="emptyinput"){
@@ -94,7 +95,7 @@
 	else if(empty($_GET["event"]) && empty($_GET["filters"]) && !empty($_GET["more"])){
 		$eventName = $_GET["more"];
 		echo "<h1>Info about: \t" .$eventName . "</h1>";
-		showSingleEvent($conn,$eventName);
+		showSingleEvent($conn,$eventName,$_SESSION["uid"]);
 	}
 ?>
 </div>

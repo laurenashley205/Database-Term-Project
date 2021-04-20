@@ -28,6 +28,7 @@ if(isset($_POST["submit"])){
 	CreateRso($conn,$name,$type);
 	$id = GetRid($conn,$name);
 	UpdateMember($conn,$_SESSION["email"],$id);
+	SetOwnership($conn,$_SESSION["email"],$id);
 	UpdateMember($conn,$first,$id);
 	UpdateMember($conn,$second,$id);
 	UpdateMember($conn,$third,$id);
